@@ -1,0 +1,43 @@
+version: '3'
+
+services: 
+    backend:
+        build:
+            context: .
+            dockerfile: Dockerfile-java
+        ports:
+            - "8080:8080"
+
+   # frontend:
+    websocket:
+        build: 
+            context: .
+            dockerfile: Dockerfile-websocket
+        ports: 
+            - "8091:8091"
+        
+    kafka:
+        image: wurstmeister/kafka
+        ports: 
+            - "9092:9092"
+        #expose: 
+        #    - "9092"
+        environment:
+            
+            KAFKA_BROKER_ID: 1
+            KAFKA_LISTENERS: OUTSIDE://kafka:9092,INSIDE://localhost:9093
+            KAFKA_ADVERTISED_LISTENERS: OUTSIDE://kafka:9092,INSIDE://localhost:9093
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: OUTSIDE:PLAINTEXT,INSIDE:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: OUTSIDE
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_CREATE_TOPICS: "chat-room:1:3"
+            #KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        
+        
+    zookeeper:
+        image: wurstmeister/zookeeper
+        #ports:
+        #    - "2181:2181"
+        restart: always
+        expose:
+            - "2181"    

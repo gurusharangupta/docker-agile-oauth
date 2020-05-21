@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "express": "*",
+        "no-kafka": "^3.4.3",
+        "socket.io": "^2.2.0",
+        "socket.io-client": "^2.2.0"
+        
+    },
+    "scripts": {
+        "start": "node server.js"
+    }
+}
