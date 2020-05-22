@@ -4,6 +4,13 @@
 
  The jar is built from agile-oauth-backend project
 
+Run command "docker-compose up"
+
+If any changes in files are made:
+
+Run command "docker-compose up --build"
+
+
  These docker files will setup
 
  Container      Port(Host:Container)
